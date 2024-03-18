@@ -1,10 +1,10 @@
 import React from "react";
 import Flex from "./Flex";
 
-const List = ({ children }) => {
+const List = ({ children , className}) => {
   return (
     <ul>
-      <Flex>{children}</Flex>
+      <Flex className={className}>{children}</Flex>
     </ul>
   );
 };
