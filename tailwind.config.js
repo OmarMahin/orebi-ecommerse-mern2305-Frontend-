@@ -17,6 +17,7 @@ export default {
       colors: {
         'text-light-color': '#767676',
         'text-dark-color': '#262626',
+        'light-background-color': '#F5F5F3',
       },
 
     },

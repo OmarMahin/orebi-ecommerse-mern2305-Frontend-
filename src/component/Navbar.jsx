@@ -31,7 +31,7 @@ const Navbar = () => {
 
   return (
     <Container>
-      <div className="pt-8">
+      <div className="py-8">
         <Flex className={'justify-between items-start'}>
           <Image src="images/logo.png" alt="logo"></Image>
           <FaBars className="absolute right-5 top-6 p-1 text-text-dark-color border-2 border-text-dark-color text-[25px] hover:text-white rounded lg:hidden hover:bg-text-dark-color duration-200 hover:cursor-pointer" onClick={handleNavState}

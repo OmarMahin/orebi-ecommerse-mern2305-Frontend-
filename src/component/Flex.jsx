@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Flex = ({children, className}) => {
+const Flex = ({children, className, onClick}) => {
   return (
-    <div className={`lg:flex ${className}`}>{children}</div>
+    <div className={`lg:flex ${className}`} onClick = {onClick}>{children}</div>
   )
 }
 
