@@ -31,7 +31,7 @@ const ShopByCategoryMenu = () => {
         <div className="  relative" ref = {categoryMenuRef}>
             <Flex className={"items-center gap-3 hover:cursor-pointer"} onClick = {handleCategoryMenu} >
                 <HiOutlineBars3BottomLeft className='text-text-dark-color w-6 h-5' />
-                <h3 className='text-text-dark-color font-DM-sans text-sm hover:font-bold duration-200'>
+                <h3 className='text-text-dark-color font-DM-sans text-sm hover:font-bold duration-200 hidden lg:block'>
                     Shop by Category
                 </h3>
             </Flex>

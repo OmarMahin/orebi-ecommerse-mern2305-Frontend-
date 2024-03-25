@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <div className='py-6 bg-light-background-color'>
         <Container>
-            <Flex className={'justify-between items-center'}>
+            <Flex className={'flex gap-2 lg:gap-0 justify-between items-center'}>
                 <ShopByCategoryMenu></ShopByCategoryMenu>
                 <SearchBar></SearchBar>
                 <CartAndAccount></CartAndAccount>

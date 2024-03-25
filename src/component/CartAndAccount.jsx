@@ -3,6 +3,7 @@ import { useState } from "react";
 import { IoMdPerson } from "react-icons/io";
 import { IoCaretDown } from "react-icons/io5";
 import { PiShoppingCartFill } from "react-icons/pi";
+import { TiArrowSortedUp } from "react-icons/ti";
 import { IoClose } from "react-icons/io5";
 import Flex from "./Flex";
 import Image from "./Image";
@@ -40,30 +41,32 @@ const CartAndAccount = () => {
     }, []);
 
     return (
-        <Flex className={"items-center text-text-dark-color gap-8 relative"}>
+        <Flex className={"flex items-center text-text-dark-color gap-3 lg:gap-8 relative"}>
             <div ref={accountRef}>
                 <Flex
-                    className={"items-center gap-1 hover:cursor-pointer relative"}
+                    className={"flex items-center gap-1 hover:cursor-pointer relative"}
                     onClick={handleShowAccount}
                 >
                     <IoMdPerson className='w-5 h-5' />
-                    <IoCaretDown />
+                    {showAccount ?  <IoCaretDown className="-rotate-180 duration-300"/> :  <IoCaretDown className="-rotate-0 duration-300"/>}
+                   
+                    
                     {showAccount && (
                         <div className='absolute -bottom-4 right-0 translate-y-[100%]'>
                             <List className={"flex-col gap-0"}>
-                                <ListItem className={"border-2 border-[#F0F0F0]"}>
+                                <ListItem className={"border-2 border-[#F0F0F0] border-b-0"}>
                                     <Link
                                         className={
-                                            "py-4 px-14 bg-white text-text-dark-color font-DM-sans w-52 hover:bg-text-dark-color hover:text-white duration-150"
+                                            "py-4 px-14 hover:bg-white hover:text-text-dark-color font-DM-sans w-52 bg-text-dark-color text-white duration-150"
                                         }
                                     >
                                         Log out
                                     </Link>
                                 </ListItem>
-                                <ListItem className={"border-2 border-[#F0F0F0]  border-t-0"}>
+                                <ListItem className={"border-2 border-[#F0F0F0] border-t-0"}>
                                     <Link
                                         className={
-                                            "py-4 px-14 bg-white text-text-dark-color font-DM-sans w-52 hover:bg-text-dark-color hover:text-white duration-150"
+                                            "py-4 px-14 hover:bg-white hover:text-text-dark-color font-DM-sans w-52 bg-text-dark-color text-white duration-150"
                                         }
                                     >
                                         My Account
@@ -87,7 +90,7 @@ const CartAndAccount = () => {
                                 ></Image>
                                 <Flex
                                     className={
-                                        "flex-col text-text-dark-color font-DM-sans font-bold gap-3 text-sm"
+                                        " flex-col text-text-dark-color font-DM-sans font-bold gap-3 text-sm"
                                     }
                                 >
                                     <h3>Black Smart Watch</h3>
@@ -105,7 +108,7 @@ const CartAndAccount = () => {
                                 $44.00
                             </span>{" "}
                         </h3>
-                        <Flex className={"justify-between mt-3"}>
+                        <Flex className={"flex justify-between mt-3"}>
                             <Button>View Cart</Button>
                             <Button>Checkout</Button>
                         </Flex>

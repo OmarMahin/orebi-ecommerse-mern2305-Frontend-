@@ -7,7 +7,7 @@ const SearchBar = () => {
         <div className='relative'>
             <Input
                 className={
-                    "w-[600px] h-12 placeholder:pl-5 placeholder:py-4 placeholder:font-DM-sans placeholder:text-sm"
+                    "sm:w-[400px] w-[200px] lg:w-[600px] h-12 placeholder:pl-5 placeholder:py-4 placeholder:font-DM-sans placeholder:text-sm "
                 }
                 placeholder={"Search Products"}
             ></Input>
