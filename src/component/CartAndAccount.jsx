@@ -52,7 +52,7 @@ const CartAndAccount = () => {
                    
                     
                     {showAccount && (
-                        <div className='absolute -bottom-4 right-0 translate-y-[100%]'>
+                        <div className='absolute -bottom-4 right-0 translate-y-[100%] z-20'>
                             <List className={"flex-col gap-0"}>
                                 <ListItem className={"border-2 border-[#F0F0F0] border-b-0"}>
                                     <Link
@@ -80,7 +80,7 @@ const CartAndAccount = () => {
             
             <div ref={cartRef}><PiShoppingCartFill className='w-5 h-5 hover:cursor-pointer' onClick={handleShowCart} />
             {showCart && (
-                <div className='absolute -bottom-4 right-0 translate-y-[100%]'>
+                <div className='absolute -bottom-4 right-0 translate-y-[100%] z-20'>
                     <List className={"bg-[#F5F5F3] w-[358px] flex-col"}>
                         <ListItem className={"items-center w-full justify-between p-5"}>
                             <Link className={"items-center gap-4"}>

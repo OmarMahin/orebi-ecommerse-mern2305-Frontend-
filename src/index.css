@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.slick-active .bannerIndex{
+    border-color: #262626 !important;
+    color: #262626 !important;
+}

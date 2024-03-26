@@ -36,7 +36,7 @@ const ShopByCategoryMenu = () => {
                 </h3>
             </Flex>
             {showCategoryMenu && (
-                <div className={"absolute -bottom-5 translate-y-[100%] left-1 bg-text-dark-color"}>
+                <div className={"absolute -bottom-5 translate-y-[100%] left-1 bg-text-dark-color z-20"}>
                     <List className={"flex-col"}>
                         <ListItem
                             className={
