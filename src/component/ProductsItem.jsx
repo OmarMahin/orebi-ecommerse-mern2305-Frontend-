@@ -4,19 +4,21 @@ import Image from "./Image"
 import List from "./List"
 import ListItem from "./ListItem"
 import { FaHeart } from "react-icons/fa"
-import { FaArrowsRotate } from "react-icons/fa6";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaArrowsRotate } from "react-icons/fa6"
+import { FaShoppingCart } from "react-icons/fa"
 
 const ProductsItem = ({ productName, productImg, productPrice, productColor, newItem }) => {
 	return (
 		<div className='relative w-fit mx-3'>
-			{newItem ? (
-				<h4 className='absolute top-5 left-5 py-2 px-7 bg-text-dark-color text-white text-sm font-DM-sans font-bold'>
+			{newItem === true ? 
+				<h4 className='absolute top-5 left-5 py-2 px-7 bg-text-dark-color text-white text-sm font-DM-sans font-bold z-10'>
 					New
 				</h4>
-			) : (
-				""
-			)}
+			 : 
+				<h4 className='absolute top-5 left-5 py-2 px-7 bg-text-dark-color text-white text-sm font-DM-sans font-bold z-0 hidden'>
+					New
+				</h4>
+			}
 
 			<div className='relative overflow-hidden group'>
 				<Image src={`images/${productImg}`} alt={"Product Image"}></Image>
@@ -38,7 +40,7 @@ const ProductsItem = ({ productName, productImg, productPrice, productColor, new
 							<h3 className='text-text-light-color font-DM-sans text-base hover:text-text-dark-color hover:font-bold duration-200'>
 								Add to Cart
 							</h3>
-							<FaShoppingCart  className='text-text-dark-color' />
+							<FaShoppingCart className='text-text-dark-color' />
 						</ListItem>
 					</List>
 				</div>

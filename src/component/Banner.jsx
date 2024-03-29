@@ -8,10 +8,11 @@ import Container from "./Container"
 const Banner = () => {
 	let settings = {
         autoplay: true,
+		autoplaySpeed: 2000,
 		dots: true,
 		infinite: true,
 		arrows: false,
-		speed: 100,
+		speed: 400,
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		appendDots: (dots) => (

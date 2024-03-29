@@ -6,7 +6,7 @@ import { FaLongArrowAltLeft } from "react-icons/fa"
 import { FaLongArrowAltRight } from "react-icons/fa"
 import "slick-carousel/slick/slick.css"
 
-const ProductsList = ({ heading }) => {
+const ProductsList = ({ heading, products }) => {
 	function nextArrowDesign() {
 		return (
 			<div>
@@ -24,11 +24,12 @@ const ProductsList = ({ heading }) => {
 	}
 
 	let settings = {
-		autoplay: false,
+		autoplay: true,
+		autoplaySpeed: 2000,
 		dots: false,
 		infinite: true,
 		arrows: true,
-		speed: 100,
+		speed: 300,
 		slidesToShow: 4,
 		slidesToScroll: 1,
 		nextArrow: nextArrowDesign(),
@@ -69,39 +70,16 @@ const ProductsList = ({ heading }) => {
 
 	return (
 		<Container>
-			<h3 className='mt-28 mb-7 font-DM-sans font-bold text-text-dark-color text-2xl lg:text-4xl'>
-				{heading}
-			</h3>
-
 			<Slider {...settings}>
-				<ProductsItem
-					productImg={"product_image_1.png"}
-					productName={"Basic Crew Neck Tee"}
-					productPrice={"$44.00"}
-					productColor={"Black"}
-					newItem='true'
-				></ProductsItem>
-				<ProductsItem
-					productImg={"product_image_2.png"}
-					productName={"Basic Crew Neck Tee"}
-					productPrice={"$44.00"}
-					productColor={"Black"}
-					newItem='true'
-				></ProductsItem>
-				<ProductsItem
-					productImg={"product_image_3.png"}
-					productName={"Basic Crew Neck Tee"}
-					productPrice={"$44.00"}
-					productColor={"Black"}
-					newItem='true'
-				></ProductsItem>
-				<ProductsItem
-					productImg={"product_image_4.png"}
-					productName={"Basic Crew Neck Tee"}
-					productPrice={"$44.00"}
-					productColor={"Black"}
-					newItem='true'
-				></ProductsItem>
+				{products.map((i) => (
+					<ProductsItem
+						productImg={i.productImg}
+						productName={i.productName}
+						productPrice={i.productPrice}
+						productColor={i.productColor}
+						newItem= {i.newItem}
+					></ProductsItem>
+				))}
 			</Slider>
 		</Container>
 	)
