@@ -4,7 +4,7 @@ import ProductsList from "./ProductsList"
 
 const SpecialOffers = () => {
   return (
-    <Container>
+    <Container className={'mb-36'}>
 			<h3 className='mt-28 mb-12 font-DM-sans font-bold text-text-dark-color text-2xl lg:text-4xl'>
             Special Offers
 			</h3>

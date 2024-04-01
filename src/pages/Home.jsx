@@ -15,9 +15,9 @@ const Home = () => {
 			<Information></Information>
 			<HomeAds ad1='ad_1.png' ad2='ad_2.png' ad3='ad_3.png'></HomeAds>
 			<NewArrivals></NewArrivals>
-      <Bestsellers></Bestsellers>
-      <HomeAds2 ad={'ad_2.1.png'}></HomeAds2>
-      <SpecialOffers></SpecialOffers>
+			<Bestsellers></Bestsellers>
+			<HomeAds2 ad={"ad_2.1.png"}></HomeAds2>
+			<SpecialOffers></SpecialOffers>
 		</>
 	)
 }

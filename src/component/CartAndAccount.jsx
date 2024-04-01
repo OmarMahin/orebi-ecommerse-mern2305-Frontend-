@@ -7,7 +7,7 @@ import { TiArrowSortedUp } from "react-icons/ti";
 import { IoClose } from "react-icons/io5";
 import Flex from "./Flex";
 import Image from "./Image";
-import Link from "./Link";
+import { Link } from "react-router-dom"
 import List from "./List";
 import ListItem from "./ListItem";
 import Button from "./Button";

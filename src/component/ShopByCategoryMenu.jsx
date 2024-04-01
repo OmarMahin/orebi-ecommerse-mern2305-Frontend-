@@ -5,7 +5,7 @@ import { useState } from "react";
 import { HiOutlineBars3BottomLeft } from "react-icons/hi2";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import Flex from "./Flex";
-import Link from "./Link";
+import { Link } from "react-router-dom"
 import List from "./List";
 import ListItem from "./ListItem";
 
