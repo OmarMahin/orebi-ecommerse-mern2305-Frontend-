@@ -15,13 +15,11 @@ const ProductsItem = ({ productName, productImg, productPrice, productColor, new
 					New
 				</h4>
 			 : 
-				<h4 className='absolute top-5 left-5 py-2 px-7 bg-text-dark-color text-white text-sm font-DM-sans font-bold z-0 hidden'>
-					New
-				</h4>
+				""
 			}
 
 			<div className='relative overflow-hidden group'>
-				<Image src={`images/${productImg}`} alt={"Product Image"}></Image>
+				<Image src={`${productImg}`} alt={"Product Image"} className = 'w-fit'></Image>
 				<div className='w-full bg-white absolute -bottom-[100%] left-0 group-hover:bottom-0 duration-300'>
 					<List className={"flex items-end p-7 flex-col gap-5"}>
 						<ListItem className={"items-center gap-4"}>
@@ -45,9 +43,9 @@ const ProductsItem = ({ productName, productImg, productPrice, productColor, new
 					</List>
 				</div>
 			</div>
-			<Flex className={"flex justify-between w-full mt-6 items-center"}>
-				<h3 className='inline-block font-DM-sans text-text-dark-color text-xl font-bold'>
-					{productName}
+			<Flex className={"flex justify-between w-full items-start"}>
+				<h3 className = {`inline-block font-DM-sans text-text-dark-color text-lg font-bold max-w-[200px] text-wrap`}>
+					{productName.length > 30 ? productName.slice(0,30) + ". . ." : productName}
 				</h3>
 				<p className='inline-block font-DM-sans text-text-light-color text-base'>
 					{productPrice}

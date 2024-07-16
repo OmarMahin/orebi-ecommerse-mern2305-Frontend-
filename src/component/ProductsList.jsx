@@ -73,7 +73,7 @@ const ProductsList = ({ heading, products }) => {
 			<Slider {...settings}>
 				{products.map((i) => (
 					<ProductsItem
-						productImg={i.productImg}
+						productImg={`images/${i.productImg}`}
 						productName={i.productName}
 						productPrice={i.productPrice}
 						productColor={i.productColor}

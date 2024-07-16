@@ -12,7 +12,7 @@ const Category = ({ categoryName, subCategory }) => {
 	return (
 		<List className={"flex-col"}>
 			<ListItem
-				className={"font-DM-sans text-text-light-color text-[17px]  flex-col"}
+				className={"font-DM-sans text-text-light-color text-[17px] flex-col w-full ml-5"}
 				
 			>
 				{subCategory ? (

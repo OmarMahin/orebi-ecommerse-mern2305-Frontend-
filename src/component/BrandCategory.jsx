@@ -8,7 +8,7 @@ const BrandCategory = ({brandName}) => {
 		<List>
 			<ListItem
 				className={
-					"font-DM-sans text-text-light-color text-[17px] py-5 border-b-2 border-[#F0F0F0]"
+					"font-DM-sans text-text-light-color text-[17px] py-5 border-b-2 border-[#F0F0F0] w-full ml-5"
 				}
 			>
 				<Link>
