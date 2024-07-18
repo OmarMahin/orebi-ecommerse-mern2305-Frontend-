@@ -1,4 +1,6 @@
 import React from "react"
+import { useEffect } from "react"
+import { toast } from "react-toastify"
 import Banner from "../component/Banner"
 import Bestsellers from "../component/Bestsellers"
 import HomeAds from "../component/HomeAds"
@@ -9,6 +11,7 @@ import ProductsList from "../component/ProductsList"
 import SpecialOffers from "../component/SpecialOffers"
 
 const Home = () => {
+
 	return (
 		<>
 			<Banner></Banner>

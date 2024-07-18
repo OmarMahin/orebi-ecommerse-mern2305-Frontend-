@@ -74,7 +74,7 @@ const Footer = () => {
 						</p>
 					</Flex>
 				<Flex className={'flex flex-col items-center lg:items-start gap-16 lg:gap-52 mt-10 lg:mt-0'}>
-                    <Image src={'./images/FooterLogo.png'} alt = 'Footer Logo' className={'lg:w-fit'}></Image>
+                    <Image src={'/images/FooterLogo.png'} alt = 'Footer Logo' className={'lg:w-fit'}></Image>
                     <p className="text-[#6D6D6D] font-DM-sans text-sm">2020 Orebi Minimal eCommerce Figma Template by Adveits</p>
                 </Flex>
 				</Flex>
