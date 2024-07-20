@@ -1,14 +1,15 @@
 import React from 'react'
 import Breadcrumb from '../component/Breadcrumb'
 import Container from '../component/Container'
-import Login from '../component/LoginForm'
+import SignUpForm from '../component/SignUpForm'
 
-const AdminLoginPage = () => {
+const SignUp = () => {
   return (
     <Container>
-        <Login heading={"Admin Login"}></Login>
+        <Breadcrumb></Breadcrumb>
+        <SignUpForm></SignUpForm>
     </Container>
   )
 }
 
-export default AdminLoginPage
+export default SignUp

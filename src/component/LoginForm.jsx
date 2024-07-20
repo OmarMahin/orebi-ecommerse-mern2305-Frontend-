@@ -5,20 +5,25 @@ import { FaEye } from "react-icons/fa"
 import { FaEyeSlash } from "react-icons/fa"
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { toast } from "react-toastify"
 import emailValidation from "../helpers/emailValidation"
+import { toast } from "react-toastify"
 
-const OTP_Send = () => {
+const LoginForm = ({ heading }) => {
+	let [showPass, setShowPass] = useState(false)
 	let [email, setEmail] = useState("")
-	let [otp, setOTP] = useState("")
-	let [otpSend, setOtpSend] = useState(false)
+	let [password, setPassword] = useState("")
+	let [showPassword, setShowPassword] = useState("")
 
 	let [emailError, setEmailError] = useState(false)
-	let [otpError, setOtpError] = useState(false)
+	let [passwordError, setPasswordError] = useState(false)
 
 	function errorsToFalse() {
 		setEmailError(false)
-		setOtpError(false)
+		setPasswordError(false)
+	}
+
+	let handleShowPassword = () => {
+		setShowPassword(!showPassword)
 	}
 
 	let handleSubmit = (e) => {
@@ -38,14 +43,12 @@ const OTP_Send = () => {
 			return
 		}
 
-		if (!otp && otpSend) {
+		if (!password) {
 			errorsToFalse()
-			setOtpError(true)
-			toast.error("Please input your OTP")
+			setPasswordError(true)
+			toast.error("Please input your password")
 			return
 		}
-
-		setOtpSend(true)
 	}
 
 	return (
@@ -53,7 +56,7 @@ const OTP_Send = () => {
 			<form className='w-[60%]'>
 				<Flex className={"flex flex-col gap-16"}>
 					<h2 className='font-DM-sans font-bold text-4xl text-text-dark-color pt-12 border-light-background-color border-t-2 flex flex-col'>
-						Forget Password
+						{heading}
 					</h2>
 					<Flex className={"mt-10 justify-start w-full gap-10"}>
 						<Flex
@@ -67,7 +70,6 @@ const OTP_Send = () => {
 								</span>
 								<span className='text-red-400 text-xl'>*</span>
 							</Flex>
-							{!otpSend ?
 							<input
 								type={"email"}
 								className={`w-full focus:outline-none py-4 border-b-2 placeholder:font-DM-sans placeholder:font-semibold ${
@@ -78,22 +80,9 @@ const OTP_Send = () => {
 									setEmail(e.target.value)
 								}}
 							></input>
-							:
-							<input
-								type={"email"}
-								className={`w-full focus:outline-none py-4 border-b-2 placeholder:font-DM-sans placeholder:font-semibold cursor-no-drop ${
-									emailError ? "border-red-500" : "border-[#e2e2e2]"
-								}`}
-								placeholder={"Email address"}
-								disabled
-								onChange={(e) => {
-									setEmail(e.target.value)
-								}}
-							></input>
-							}
 
 							<Button className={"mt-12"} onClick={handleSubmit}>
-								{otpSend ? "Confirm" : "Send OTP"}
+								Log in
 							</Button>
 						</Flex>
 
@@ -104,36 +93,50 @@ const OTP_Send = () => {
 						>
 							<Flex className={"items-center gap-2"}>
 								<span className='font-DM-sans font-bold text-xl text-text-dark-color'>
-									OTP
+									Password
 								</span>
 								<span className='text-red-400 text-xl'>*</span>
 							</Flex>
-							{otpSend ?
+							<div className='relative'>
 								<input
-									type={"text"}
+									type={showPassword ? "text" : "password"}
 									className={`w-full focus:outline-none py-4 border-b-2 placeholder:font-DM-sans placeholder:font-semibold ${
-										otpError ? "border-red-500" : "border-[#e2e2e2]"
+										passwordError ? "border-red-500" : "border-[#e2e2e2]"
 									}`}
-									placeholder={"OTP"}
+									placeholder={"Password"}
 									onChange={(e) => {
-										setOTP(e.target.value)
+										setPassword(e.target.value)
 									}}
 								></input>
-								:
-								<input
-									type={"text"}
-									className={`w-full focus:outline-none py-4 border-b-2 placeholder:font-DM-sans placeholder:font-semibold cursor-no-drop ${
-										otpError ? "border-red-500" : "border-[#e2e2e2]"
-									}`}
-									disabled
-									placeholder={"OTP"}
-									onChange={(e) => {
-										setOTP(e.target.value)
-									}}
-								></input>
-							}
-							
-							
+								{password ? (
+									!showPassword ? (
+										<FaEye
+											className='absolute top-1/2 right-4 text-text-light-color cursor-pointer'
+											onClick={handleShowPassword}
+										></FaEye>
+									) : (
+										<FaEyeSlash
+											className='absolute top-1/2 right-4 text-text-light-color cursor-pointer'
+											onClick={handleShowPassword}
+										></FaEyeSlash>
+									)
+								) : (
+									""
+								)}
+							</div>
+							<Flex
+								className={
+									"mt-12 justify-center flex flex-col items-end gap-3 font-DM-sans font-semibold text-text-light-color"
+								}
+							>
+								<Link to={'/forget_password'}>
+									<span className='text-text-dark-color'>Forgot password?</span>
+								</Link>
+								<span>
+									Don't have an account?{" "}
+									<Link className='text-text-dark-color' to={'/sign_up'}>Sign up</Link>
+								</span>
+							</Flex>
 						</Flex>
 					</Flex>
 				</Flex>
@@ -142,4 +145,4 @@ const OTP_Send = () => {
 	)
 }
 
-export default OTP_Send
+export default LoginForm

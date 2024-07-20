@@ -15,6 +15,8 @@ import { useEffect } from "react";
 import { useRef } from "react";
 
 const CartAndAccount = () => {
+
+    let [loggedIn, setLoggedIn] = useState(false)
     let accountRef = useRef();
     let cartRef = useRef();
 
@@ -59,8 +61,10 @@ const CartAndAccount = () => {
                                         className={
                                             "py-4 px-14 hover:bg-white hover:text-text-dark-color font-DM-sans w-52 bg-text-dark-color text-white duration-150"
                                         }
+
+                                        to = {loggedIn ? "/" : "/login"}
                                     >
-                                        Log out
+                                        {loggedIn ? "My Account" : "Log in"}
                                     </Link>
                                 </ListItem>
                                 <ListItem className={"border-2 border-[#F0F0F0] border-t-0"}>
@@ -68,8 +72,9 @@ const CartAndAccount = () => {
                                         className={
                                             "py-4 px-14 hover:bg-white hover:text-text-dark-color font-DM-sans w-52 bg-text-dark-color text-white duration-150"
                                         }
+                                        to = {loggedIn ? "/" : "/sign_up"}
                                     >
-                                        My Account
+                                       {loggedIn ? "Log out" : "Sign up"}
                                     </Link>
                                 </ListItem>
                             </List>

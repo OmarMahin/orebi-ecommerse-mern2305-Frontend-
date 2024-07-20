@@ -13,8 +13,10 @@ import Change_User_Password from "./pages/Change_User_Password";
 import EmailVerify from "./pages/EmailVerify";
 import Forget_Password from "./pages/Forget_Password";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import Products from "./pages/Products";
+import SignUp from "./pages/SignUp";
 
 function App() {
     const router = createBrowserRouter(
@@ -28,6 +30,8 @@ function App() {
         <Route path="/change_password" element = {<Change_User_Password></Change_User_Password>}></Route>
         <Route path="/verifyUser/:id" element = {<EmailVerify></EmailVerify>}></Route>
         <Route path="/bad_request" element = {<BadRequest></BadRequest>}></Route>
+        <Route path="/sign_up" element = {<SignUp></SignUp>}></Route>
+        <Route path="/login" element = {<Login></Login>}></Route>
         <Route path="*" element = {<PageNotFound></PageNotFound>}></Route>
 
       </Route>)
