@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react"
+import AdminPanel from "../component/AdminPanel"
+import Container from "../component/Container"
 
 const AdminPage = () => {
-  return (
-    <div>AdminPage</div>
-  )
+	return (
+		<Container>
+			<AdminPanel></AdminPanel>
+		</Container>
+	)
 }
 
 export default AdminPage
