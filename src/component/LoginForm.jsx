@@ -4,9 +4,10 @@ import Flex from "./Flex"
 import { FaEye } from "react-icons/fa"
 import { FaEyeSlash } from "react-icons/fa"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import emailValidation from "../helpers/emailValidation"
 import { toast } from "react-toastify"
+import axios from "axios"
 
 const LoginForm = ({ heading }) => {
 	let [showPass, setShowPass] = useState(false)
@@ -16,6 +17,10 @@ const LoginForm = ({ heading }) => {
 
 	let [emailError, setEmailError] = useState(false)
 	let [passwordError, setPasswordError] = useState(false)
+
+	let [loading, setLoading] = useState(false)
+
+	let navigation = useNavigate()
 
 	function errorsToFalse() {
 		setEmailError(false)
@@ -49,6 +54,26 @@ const LoginForm = ({ heading }) => {
 			toast.error("Please input your password")
 			return
 		}
+
+		errorsToFalse()
+
+		setLoading(true)
+		axios.post("http://localhost:3000/api/v1/auth/login",{
+			email,
+			password
+		}).then((response)=>{
+			if (response.data.valid){
+				navigation('/')
+			}
+			else{
+				toast.error(response.data.error)
+			}
+
+			setLoading(false)
+		}).catch((error)=>{
+			setLoading(false)
+			console.log(error)
+		})
 	}
 
 	return (
@@ -81,7 +106,7 @@ const LoginForm = ({ heading }) => {
 								}}
 							></input>
 
-							<Button className={"mt-12"} onClick={handleSubmit}>
+							<Button className={"mt-12"} onClick={handleSubmit} loading = {loading}>
 								Log in
 							</Button>
 						</Flex>

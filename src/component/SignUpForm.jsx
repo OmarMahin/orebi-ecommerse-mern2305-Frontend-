@@ -1,5 +1,7 @@
+import axios from "axios"
 import React, { useState } from "react"
 import { FaEye, FaEyeSlash } from "react-icons/fa6"
+import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import emailValidation from "../helpers/emailValidation"
 import Button from "./Button"
@@ -37,6 +39,13 @@ const SignUpForm = () => {
 	let [passwordError, setPasswordError] = useState(false)
 	let [repeatPasswordError, setRepeatPasswordError] = useState(false)
 
+	//status
+	let [loading, setLoading] = useState(false)
+
+
+
+	let navigation = useNavigate()
+
 	function errorsToEmpty() {
 		setFnameError(false)
 		setLnameError(false)
@@ -64,7 +73,7 @@ const SignUpForm = () => {
 
 	let handleSubmit = (e) => {
 		e.preventDefault()
-
+		
 		if (!fname) {
 			errorsToEmpty()
 			setFnameError(true)
@@ -148,6 +157,39 @@ const SignUpForm = () => {
 			toast.error("Please check all the mandetory(*) fields are filled up")
 			return
 		}
+
+		errorsToEmpty()
+		setLoading(true)
+
+		axios
+			.post("http://localhost:3000/api/v1/auth/registration", {
+				first_name: fname,
+				last_name: lname,
+				email,
+				phone: tel,
+				address1,
+				address2: address2 ? address2 : null,
+				city,
+				post_code: postCode,
+				country,
+				password,
+				newsletter: newsletter
+			})
+			.then((response) => {
+				if (response.data.valid) {
+					toast.success(response.data.message)
+				} else {
+					toast.error(response.data.error)
+				}
+				setLoading(false)
+				navigation('/login')
+			})
+			.catch((error) => {
+				toast.error(response.data.error)
+				setLoading(false)
+			})
+
+			
 	}
 
 	return (
@@ -703,7 +745,7 @@ const SignUpForm = () => {
 					<label for={"No"}>No</label>
 				</Flex>
 
-				<Button className={"mt-8"} onClick={handleSubmit}>
+				<Button className={"mt-8"} onClick={handleSubmit} loading = {loading}>
 					Sign Up
 				</Button>
 			</form>
