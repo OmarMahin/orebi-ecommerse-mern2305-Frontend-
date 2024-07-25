@@ -9,7 +9,10 @@ import emailValidation from "../helpers/emailValidation"
 import { toast } from "react-toastify"
 import axios from "axios"
 
-const LoginForm = ({ heading }) => {
+const LoginForm = ({ heading, loginFor }) => {
+
+	axios.defaults.withCredentials = true
+
 	let [showPass, setShowPass] = useState(false)
 	let [email, setEmail] = useState("")
 	let [password, setPassword] = useState("")
@@ -58,11 +61,16 @@ const LoginForm = ({ heading }) => {
 		errorsToFalse()
 
 		setLoading(true)
-		axios.post("http://localhost:3000/api/v1/auth/login",{
+		console.log(loginFor)
+		axios.post(`http://localhost:3000/api/v1/auth/${loginFor == 'admin' ? "admin_login" : 'member_login'}`,{
 			email,
 			password
 		}).then((response)=>{
 			if (response.data.valid){
+				if (loginFor == 'admin'){
+					navigation('/admin')
+					return
+				}
 				navigation('/')
 			}
 			else{

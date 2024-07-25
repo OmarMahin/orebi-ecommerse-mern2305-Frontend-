@@ -6,7 +6,7 @@ import Login from '../component/LoginForm'
 const AdminLoginPage = () => {
   return (
     <Container>
-        <Login heading={"Admin Login"}></Login>
+        <Login heading={"Admin Login"} loginFor = {'admin'}></Login>
     </Container>
   )
 }

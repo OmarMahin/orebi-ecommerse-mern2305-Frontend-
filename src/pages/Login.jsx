@@ -7,7 +7,7 @@ const Login = () => {
   return (
     <Container>
         <Breadcrumb></Breadcrumb>
-        <LoginForm heading={"Customer Login"}></LoginForm>
+        <LoginForm heading={"Customer Login"} loginFor = {'member'}></LoginForm>
     </Container>
   )
 }
