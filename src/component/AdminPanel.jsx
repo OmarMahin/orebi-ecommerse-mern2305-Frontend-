@@ -24,7 +24,7 @@ const AdminPanel = () => {
 
 			<Flex className={"w-[90%] gap-5"}>
 				<Flex className={"bg-text-dark-color h-[500px]"}>
-					<List className={"flex flex-col font-DM-sans text-white text-lg w-60"}>
+					<List className={"flex flex-col font-DM-sans text-white w-60"}>
 						<div>
 							<ListItem
 								className={`flex py-3 border-b-2 border-[#2D2D2D] pl-5 justify-between items-center cursor-pointer relative after:absolute after:h-full after:w-2 after:top-0 after:left-0 ${

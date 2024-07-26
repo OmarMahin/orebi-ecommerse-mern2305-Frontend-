@@ -1,6 +1,9 @@
+import axios from "axios"
 import React from "react"
+import { useEffect } from "react"
 import { useState } from "react"
 import { TailSpin } from "react-loader-spinner"
+import { toast } from "react-toastify"
 import Button from "./Button"
 import Flex from "./Flex"
 import List from "./List"
@@ -9,6 +12,9 @@ import ListItem from "./ListItem"
 const UserInformation = ({ id }) => {
 	let [userId, setUserId] = useState("")
 	let [loading, setLoading] = useState(false)
+	let [dataLoading, setDataLoading] = useState(true)
+	let [dataUpdating, setDataUpdating] = useState(false)
+	let [refresh, setRefresh] = useState(false)
 	let [showUserInformation, setShowUserInformation] = useState(false)
 
 	let [_userId, _setUserId] = useState("")
@@ -22,32 +28,20 @@ const UserInformation = ({ id }) => {
 	let [updatedUserEmail, setUpdatedUserEmail] = useState("")
 	let [updatedUserMemberType, setUpdatedUserMemberType] = useState("")
 
-	let userData = [
-		{
-			_id: 1239219803709290,
-			first_name: "Md.Omar",
-			last_name: "Karim",
-			name: "Md.Omar Karim",
-			email: "okmahin2@gmail.com",
-			memberType: "admin",
-		},
-		{
-			_id: 1239219804709300,
-			first_name: "Md.Omar",
-			last_name: "Karim",
-			name: "Md.Omar Karim",
-			email: "okmahin66@gmail.com",
-			memberType: "customer",
-		},
-		{
-			_id: 1239219804709200,
-			first_name: "Md.Omar",
-			last_name: "Karim",
-			name: "Md.Omar Karim",
-			email: "okmahin2@gmail.com",
-			memberType: "customer",
-		},
-	]
+	let [userData, setUserData] = useState([])
+
+	function emptyAllFields() {
+		setUserFname("")
+		setUserLname("")
+		setUserId("")
+		setUserEmail("")
+		setUserMemberType("")
+		setUpdatedUserEmail("")
+		setUpdatedUserFname("")
+		setUpdatedUserLname("")
+		setUpdatedUserMemberType("")
+		setShowUserInformation(false)
+	}
 
 	let findUserById = (user_id) => {
 		setUserId("")
@@ -59,11 +53,11 @@ const UserInformation = ({ id }) => {
 		if (flag != null) {
 			setShowUserInformation(true)
 			const user = userData[flag]
-            _setUserId(user._id)
+			_setUserId(user._id)
 			setUserFname(user.first_name)
 			setUserLname(user.last_name)
 			setUserEmail(user.email)
-			setUserMemberType(user.memberType)
+			setUserMemberType(user.role)
 		} else {
 			setShowUserInformation(false)
 		}
@@ -71,9 +65,52 @@ const UserInformation = ({ id }) => {
 		setLoading(false)
 	}
 
-    let handleUpdate = ()=>{
+	let handleUpdate = () => {
+		setDataUpdating(true)
+		const updated_data = {
+			first_name: updatedUserFname ? updatedUserFname : userFname,
+			last_name: updatedUserLname ? updatedUserLname : userLname,
+			fullname: null,
+			email: updatedUserEmail ? updatedUserEmail : userEmail,
+			role: updatedUserMemberType ? updatedUserMemberType : userMemberType,
+		}
+		axios
+			.post("http://localhost:3000/api/v1/user_data/update_user", {
+				id: _userId,
+				data: updated_data,
+			})
+			.then((response) => {
+				if (response.status == "200") {
+					if (response.data.success) {
+						toast.success(response.data.data)
+						emptyAllFields()
+						setDataLoading(true)
+						setDataUpdating(false)
+						setRefresh(!refresh)
+					}
+				}
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+	}
 
-    }
+	useEffect(() => {
+		axios
+			.get("http://localhost:3000/api/v1/user_data/all_users")
+			.then((response) => {
+				if (response.status == "200") {
+					if (response.data.success) {
+						const user_data = response.data.data
+						setUserData(user_data)
+						setDataLoading(false)
+					}
+				}
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+	}, [refresh])
 
 	return (
 		<Flex className={"w-full flex flex-col items-start"}>
@@ -90,25 +127,37 @@ const UserInformation = ({ id }) => {
 						<ListItem className={"w-[180px]"}>Email</ListItem>
 						<ListItem className={"w-[100px] justify-center"}>User Type</ListItem>
 					</List>
-
-					<List className={" font-DM-sans text-text-dark-color pt-4 mt-2 flex flex-col"}>
-						{userData.map((data, index) => (
-							<ListItem>
-								<List
-									className={`justify-between gap-20 ${
-										index % 2 == 0 ? "bg-light-background-color" : "bg-none"
-									}  p-2 relative after:absolute after:w-full after:h-full after:hover:bg-black/10 after:duration-200 after:top-0 after:left-0`}
-								>
-									<ListItem className={"w-[180px] relative z-10"}>{data._id}</ListItem>
-									<ListItem className={"w-[180px]"}>{data.name}</ListItem>
-									<ListItem className={"w-[180px]"}>{data.email}</ListItem>
-									<ListItem className={"w-[100px] justify-center"}>
-										{data.memberType}
-									</ListItem>
-								</List>
-							</ListItem>
-						))}
-					</List>
+					{dataLoading ? (
+						<Flex className={"w-full justify-center py-20"}>
+							<TailSpin
+								visible={dataLoading}
+								height='80'
+								width='80'
+								color={"#262626"}
+								ariaLabel='tail-spin-loading'
+								radius='1'
+							></TailSpin>
+						</Flex>
+					) : (
+						<List className={" font-DM-sans text-text-dark-color pt-4 mt-2 flex flex-col"}>
+							{userData.map((data, index) => (
+								<ListItem>
+									<List
+										className={`justify-between gap-20 ${
+											index % 2 == 0 ? "bg-light-background-color" : "bg-none"
+										}  p-2 relative after:absolute after:w-full after:h-full after:hover:bg-black/10 after:duration-200 after:top-0 after:left-0`}
+									>
+										<ListItem className={"w-[180px] relative z-10"}>{data._id}</ListItem>
+										<ListItem className={"w-[180px]"}>{data.fullname}</ListItem>
+										<ListItem className={"w-[180px]"}>{data.email}</ListItem>
+										<ListItem className={"w-[100px] justify-center"}>
+											{data.role}
+										</ListItem>
+									</List>
+								</ListItem>
+							))}
+						</List>
+					)}
 				</div>
 			) : (
 				<div className='w-full'>
@@ -149,99 +198,100 @@ const UserInformation = ({ id }) => {
 									></TailSpin>
 								</Flex>
 							) : showUserInformation ? (
-								<Flex className={'flex-col w-full'}>
-                                    <span className="font-DM-sans font-semibold text-text-dark-color text-lg py-3 mb-4">User Id: {_userId}</span>
-                                    <Flex className={"w-full gap-5"}>
-									<Flex className={"w-1/2 flex-col gap-10"}>
-										
-
-										<Flex className={"flex flex-col w-1/2"}>
-											<span className='font-DM-sans font-bold text-lg text-text-dark-color'>
-												First Name
-											</span>
-											<input
-												type={"text"}
-												className={`w-full focus:outline-none py-2 border-b-2 placeholder:font-DM-sans border-[#e2e2e2] text-text-dark-color font-DM-sans
+								<Flex className={"flex-col w-full"}>
+									<span className='font-DM-sans font-semibold text-text-dark-color text-lg py-3 mb-4'>
+										User Id: {_userId}
+									</span>
+									<Flex className={"w-full gap-5"}>
+										<Flex className={"w-1/2 flex-col gap-10"}>
+											<Flex className={"flex flex-col w-1/2"}>
+												<span className='font-DM-sans font-bold text-lg text-text-dark-color'>
+													First Name
+												</span>
+												<input
+													type={"text"}
+													className={`w-full focus:outline-none py-2 border-b-2 placeholder:font-DM-sans border-[#e2e2e2] text-text-dark-color font-DM-sans
 										`}
-												placeholder={userFname}
-												value={updatedUserFname}
-												onChange={(e) => {
-													setUpdatedUserFname(e.target.value)
-												}}
-											></input>
-										</Flex>
+													placeholder={userFname}
+													value={updatedUserFname}
+													onChange={(e) => {
+														setUpdatedUserFname(e.target.value)
+													}}
+												></input>
+											</Flex>
 
-										<Flex className={"flex flex-col w-1/2"}>
-											<span className='font-DM-sans font-bold text-lg text-text-dark-color'>
-												User Email
-											</span>
-											<input
-												type={"email"}
-												className={`w-full focus:outline-none py-2 border-b-2 placeholder:font-DM-sans border-[#e2e2e2] text-text-dark-color font-DM-sans
+											<Flex className={"flex flex-col w-1/2"}>
+												<span className='font-DM-sans font-bold text-lg text-text-dark-color'>
+													User Email
+												</span>
+												<input
+													type={"email"}
+													className={`w-full focus:outline-none py-2 border-b-2 placeholder:font-DM-sans border-[#e2e2e2] text-text-dark-color font-DM-sans
 										`}
-												placeholder={userEmail}
-												value={updatedUserEmail}
-												onChange={(e) => {
-													setUpdatedUserEmail(e.target.value)
-												}}
-											></input>
+													placeholder={userEmail}
+													value={updatedUserEmail}
+													onChange={(e) => {
+														setUpdatedUserEmail(e.target.value)
+													}}
+												></input>
+											</Flex>
+											<Flex className={""}>
+												<Button
+													disabled={
+														updatedUserEmail ||
+														updatedUserFname ||
+														updatedUserLname ||
+														updatedUserMemberType
+															? false
+															: true
+													}
+													onClick={handleUpdate}
+													loading={dataUpdating}
+												>
+													Update
+												</Button>
+											</Flex>
 										</Flex>
-										<Flex
-											className={
-												""
-											}
-										>
-											<Button
-												disabled={
-													updatedUserEmail ||
-													updatedUserFname ||
-													updatedUserLname ||
-													updatedUserMemberType
-														? false
-														: true
-												}
-                                                onClick = {handleUpdate}
-											>
-												Update
-											</Button>
-										</Flex>
-									</Flex>
-									<Flex className={"w-1/2 flex-col gap-10"}>
-										<Flex className={"flex flex-col w-1/2"}>
-											<span className='font-DM-sans font-bold text-lg text-text-dark-color'>
-												Last Name
-											</span>
-											<input
-												type={"text"}
-												className={`w-full focus:outline-none py-2 border-b-2 placeholder:font-DM-sans border-[#e2e2e2] text-text-dark-color font-DM-sans
+										<Flex className={"w-1/2 flex-col gap-10"}>
+											<Flex className={"flex flex-col w-1/2"}>
+												<span className='font-DM-sans font-bold text-lg text-text-dark-color'>
+													Last Name
+												</span>
+												<input
+													type={"text"}
+													className={`w-full focus:outline-none py-2 border-b-2 placeholder:font-DM-sans border-[#e2e2e2] text-text-dark-color font-DM-sans
 										`}
-												placeholder={userLname}
-												value={updatedUserLname}
-												onChange={(e) => {
-													setUpdatedUserLname(e.target.value)
-												}}
-											></input>
-										</Flex>
+													placeholder={userLname}
+													value={updatedUserLname}
+													onChange={(e) => {
+														setUpdatedUserLname(e.target.value)
+													}}
+												></input>
+											</Flex>
 
-										<Flex className={"flex flex-col w-1/2"}>
-											<span className='font-DM-sans font-bold text-lg text-text-dark-color'>
-												Member Type
-											</span>
+											<Flex className={"flex flex-col w-1/2"}>
+												<span className='font-DM-sans font-bold text-lg text-text-dark-color'>
+													Member Type
+												</span>
 
-											<select
-												className={`w-full focus:outline-none py-2 border-b-2 placeholder:font-DM-sans border-[#e2e2e2] text-text-light-color font-DM-sans
+												<select
+													className={`w-full focus:outline-none py-2 border-b-2 placeholder:font-DM-sans border-[#e2e2e2] text-text-light-color font-DM-sans
 										`}
-												defaultValue={userMemberType}
-												onChange={(e) => {
-													setUpdatedUserMemberType(e.target.value)
-												}}
-											>
-												<option>customer</option>
-												<option>admin</option>
-												<option>merchant</option>
-											</select>
+													value={
+														updatedUserMemberType
+															? updatedUserMemberType
+															: userMemberType
+													}
+													onChange={(e) => {
+														setUpdatedUserMemberType(e.target.value)
+													}}
+												>
+													<option>member</option>
+													<option>admin</option>
+													<option>merchant</option>
+												</select>
+											</Flex>
 										</Flex>
-                                        </Flex>
 									</Flex>
 								</Flex>
 							) : (
