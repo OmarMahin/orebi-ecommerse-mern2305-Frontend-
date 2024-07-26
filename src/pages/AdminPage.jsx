@@ -16,30 +16,28 @@ const AdminPage = () => {
 
 	const navigation = useNavigate()
 
-	axios
-		.get("http://localhost:3000/api/v1/verify/authorize_user")
-		.then((response) => {
-			if (response.status == "200") {
-				const data = response.data
-				console.log(data)
-				if (data.authorized && data.data.type == "admin") {
-					setLoading(false)
-				} else {
-					navigation("/")
+	useEffect(() => {
+		axios
+			.get("http://localhost:3000/api/v1/verify/authorize_user")
+			.then((response) => {
+				if (response.status == "200") {
+					const data = response.data
+					if (data.authorized && data.data.type == "admin") {
+						setLoading(false)
+					} else {
+						navigation("/admin_login")
+					}
 				}
-			}
-		})
-		.catch((err) => {
-			setLoading(false)
-			navigation("/")
-			console.log(err)
-		})
-	
-	useEffect(()=>{
-		setTimeout(()=>{
+			})
+			.catch((err) => {
+				setLoading(false)
+				navigation("/admin_login")
+			})
+
+		setTimeout(() => {
 			setRefresh(!refresh)
 		}, 120000)
-	}, [refresh])	
+	}, [refresh])
 
 	return (
 		<Container>

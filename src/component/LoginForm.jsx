@@ -68,10 +68,10 @@ const LoginForm = ({ heading, loginFor }) => {
 		}).then((response)=>{
 			if (response.data.valid){
 				if (loginFor == 'admin'){
-					navigation('/admin')
+					window.location.pathname = '/admin'
 					return
 				}
-				navigation('/')
+				window.location.pathname = '/'
 			}
 			else{
 				toast.error(response.data.error)
