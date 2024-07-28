@@ -4,16 +4,22 @@ import Flex from "./Flex"
 import { FaEye } from "react-icons/fa"
 import { FaEyeSlash } from "react-icons/fa"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import axios from "axios"
 
-const Change_Password = () => {
+const Change_Password = ({user_id}) => {
+
+	const navigation = useNavigate()
+
 	let [showPass, setShowPass] = useState(false)
 	let [showConfirmPass, setShowConfirmPass] = useState(false)
 	let [password, setPassword] = useState("")
     let [confirmPassword, setConfirmPassword] = useState("")
 	let [passwordError, setPasswordError] = useState(false)
 	let [confirmPasswordError, setConfirmPasswordError] =  useState(false)
+
+	let [dataUpdating, setDataUpdating] = useState(false)
 
 
 	let handleShowPass = () => {
@@ -52,6 +58,26 @@ const Change_Password = () => {
 		}
 
 		errorsToFalse()
+
+		setDataUpdating(true)
+
+		axios
+			.post(`http://localhost:3000/api/v1/user_data/change_password`, {
+				id: user_id,
+				password,
+			})
+			.then((response) => {
+				if (response.status == "200") {
+					if (response.data.success) {
+						toast.success("Password changed successfully")
+						setDataUpdating(false)
+						navigation('/login')
+					}
+				}
+			})
+			.catch((error) => {
+				console.log(error)
+			})
 	}
 
 	return (
@@ -101,7 +127,7 @@ const Change_Password = () => {
 									""
 								)}
 							</div>
-							<Button className={"mt-12 w-fit"} onClick={changePass}>
+							<Button className={"mt-12 w-fit"} onClick={changePass} loading = {dataUpdating}>
 								Change Password
 							</Button>
 						</Flex>

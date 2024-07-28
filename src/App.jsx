@@ -27,7 +27,7 @@ function App() {
         <Route path="/admin" element = {<AdminPage></AdminPage>}></Route>
         <Route path="/admin_login" element = {<AdminLoginPage></AdminLoginPage>}></Route>
         <Route path="/forget_password" element = {<Forget_Password></Forget_Password>}></Route>
-        <Route path="/change_password" element = {<Change_User_Password></Change_User_Password>}></Route>
+        <Route path="/forget_password/:id" element = {<Change_User_Password></Change_User_Password>}></Route>
         <Route path="/verifyUser/:id" element = {<EmailVerify></EmailVerify>}></Route>
         <Route path="/bad_request" element = {<BadRequest></BadRequest>}></Route>
         <Route path="/sign_up" element = {<SignUp></SignUp>}></Route>
