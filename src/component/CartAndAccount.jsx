@@ -80,8 +80,12 @@ const CartAndAccount = () => {
 			.then((response) => {
 				if (response.status == "200") {
 					const data = response.data
-					if (data.authorized) {
+					if (data.authorized && !loggedIn) {
 						setLoggedIn(true)
+					}
+					else if (!data.authorized && loggedIn){
+						setLoggedIn(false)
+						window.location.reload()
 					}
 				}
 			})
