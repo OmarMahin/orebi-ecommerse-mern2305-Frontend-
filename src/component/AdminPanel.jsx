@@ -22,7 +22,7 @@ const AdminPanel = () => {
 				Admin Panel
 			</h2>
 
-			<Flex className={"w-[90%] gap-5"}>
+			<Flex className={"w-[95%] gap-5"}>
 				<Flex className={"bg-text-dark-color h-[500px]"}>
 					<List className={"flex flex-col font-DM-sans text-white w-60"}>
 						<div>
@@ -103,7 +103,16 @@ const AdminPanel = () => {
 									id={"2/2"}
 									onClick={changeId}
 								>
-									Update category
+									Add category
+								</ListItem>
+								<ListItem
+									className={`flex py-3 border-b-2 border-[#2D2D2D] pl-5 justify-between items-center cursor-pointer relative after:absolute after:h-2 after:w-2 after:top-1/2 after:-translate-y-1/2 after:left-0 ${
+										currentId == "2/3" ? "after:bg-text-light-color" : "after:bg-none"
+									} after:rounded-full after:duration-100`}
+									id={"2/3"}
+									onClick={changeId}
+								>
+									Category Information
 								</ListItem>
 							</List>
 						</div>

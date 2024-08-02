@@ -5,9 +5,9 @@ import UserInformation from "./UserInformation"
 
 const AdminPanelInformation = ({ id }) => {
 	return id[0] == "1" ? (
-		<UserInformation id = {id[2]}></UserInformation>
+		<UserInformation id={id[2]}></UserInformation>
 	) : id[0] == "2" ? (
-		<CategoryInformation></CategoryInformation>
+		<CategoryInformation id={id[2]}></CategoryInformation>
 	) : id[0] == "3" ? (
 		<ProductInformation></ProductInformation>
 	) : (
