@@ -84,10 +84,10 @@ const CategoryInformation = ({ id }) => {
 			})
 	}
 
-  let deleteCategory = (id) =>{
-    axios
+	let deleteCategory = (id) => {
+		axios
 			.delete("http://localhost:3000/api/v1/category/delete_data", {
-				data: {id},
+				data: { id },
 			})
 			.then((response) => {
 				if (response.status == "200") {
@@ -103,7 +103,7 @@ const CategoryInformation = ({ id }) => {
 			.catch((error) => {
 				console.log(error)
 			})
-  }
+	}
 
 	let changeName = (id, previousName, index) => {
 		axios
@@ -222,7 +222,7 @@ const CategoryInformation = ({ id }) => {
 									<List
 										className={`justify-start gap-16 ${
 											index % 2 == 0 ? "bg-light-background-color" : "bg-none"
-										}  p-2 relative after:absolute after:w-full after:h-full after:hover:bg-black/10 after:duration-200 after:top-0 after:left-0`}
+										}  p-2 relative after:absolute after:w-full after:h-full after:hover:bg-black/10 after:duration-200 after:top-0 after:left-0 items-center`}
 									>
 										<ListItem className={"w-[180px]"}>
 											{updateIndex == index ? (
@@ -289,7 +289,10 @@ const CategoryInformation = ({ id }) => {
 													</button>
 
 													<button
-														className={`px-4 py-[6px] relative z-10 bg-red-300 hover:bg-red-400 font-DM-sans font-semibold text-sm text-text-dark-color duration-300 `} onClick = {()=>{deleteCategory(data._id)}}
+														className={`px-4 py-[6px] relative z-10 bg-red-300 hover:bg-red-400 font-DM-sans font-semibold text-sm text-text-dark-color duration-300 `}
+														onClick={() => {
+															deleteCategory(data._id)
+														}}
 													>
 														Delete
 													</button>
