@@ -144,7 +144,7 @@ const AdminPanel = () => {
 									id={"3/1"}
 									onClick={changeId}
 								>
-									All products
+									Create product
 								</ListItem>
 								<ListItem
 									className={`flex py-3 border-b-2 border-[#2D2D2D] pl-5 justify-between items-center cursor-pointer relative after:absolute after:h-2 after:w-2 after:top-1/2 after:-translate-y-1/2 after:left-0 ${
@@ -153,7 +153,7 @@ const AdminPanel = () => {
 									id={"3/2"}
 									onClick={changeId}
 								>
-									Update products
+									Update product
 								</ListItem>
 							</List>
 						</div>

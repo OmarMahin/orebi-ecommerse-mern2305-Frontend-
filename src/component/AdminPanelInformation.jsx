@@ -9,7 +9,7 @@ const AdminPanelInformation = ({ id }) => {
 	) : id[0] == "2" ? (
 		<CategoryInformation id={id[2]}></CategoryInformation>
 	) : id[0] == "3" ? (
-		<ProductInformation></ProductInformation>
+		<ProductInformation id={id[2]}></ProductInformation>
 	) : (
 		""
 	)
