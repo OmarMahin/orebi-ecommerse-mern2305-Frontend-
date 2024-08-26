@@ -243,7 +243,7 @@ const CategoryInformation = ({ id }) => {
 										</ListItem>
 										<ListItem className={"w-[100px]"}>{data.categoryType}</ListItem>
 										<ListItem className={"w-[100px] justify-center"}>
-											{data.products == null ? "0" : "10"}
+											{`${data.products.length}`}
 										</ListItem>
 										<ListItem className={"w-[100px] justify-center"}>
 											<div

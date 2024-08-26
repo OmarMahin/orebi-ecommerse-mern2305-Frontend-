@@ -14,16 +14,20 @@ import { useEffect } from "react"
 import { useState } from "react"
 
 const Products = () => {
-  let [productsData, setProductsData] = useState([])
-  useEffect(()=>{
-    function getProducts(){
-      axios.get("https://dummyjson.com/products").then((data)=>{
-        setProductsData(data.data.products)
-      })
-    }
+	let [productsData, setProductsData] = useState([])
+	useEffect(() => {
 
-    getProducts()
-  },[])
+		axios.get("http://localhost:3000/api/v1/product/get_all_products").then((response) => {
+			if (response.status == "200") {
+				const data = response.data
+				if (data.success) {
+					setProductsData(data.data)
+				}
+			}		
+		}).catch((error) => {
+			console.log(error)
+		})
+	}, [])
 
 	return (
 		<Container>
@@ -78,23 +82,17 @@ const Products = () => {
 							</div>
 						</Flex>
 					</div>
-					<section className="mt-16">
-						<Flex className={'flex-wrap gap-y-12 justify-between'}>
-							{
-                productsData.map((data) => (
-                  <ProductsItem
-                    productImg= {data.thumbnail}
-                    productName={data.title}
-                    productPrice='$44.00'
-                    productColor='Black'
-                    newItem={true}
-                  ></ProductsItem>
-
-                ))
-
-                
-              }
-							
+					<section className='mt-16'>
+						<Flex className={"flex-wrap gap-y-12 gap-x-20"}>
+							{productsData && productsData.map((data) => (
+								<ProductsItem
+									productImg={data.productImage}
+									productName={data.productName}
+									productPrice={data.productPrice}
+									productColor='Black'
+									newItem={true}
+								></ProductsItem>
+							))}
 						</Flex>
 					</section>
 				</div>
