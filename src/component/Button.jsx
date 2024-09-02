@@ -1,7 +1,7 @@
 import React from "react"
 import { TailSpin } from "react-loader-spinner"
 
-const Button = ({ children, className, onClick, disabled, loading}) => {
+const Button = ({ children, className, onClick, disabled, loading = false}) => {
 	return disabled ? (
 		<button
 			className={`py-3 px-9 border-2 border-text-dark-color text-text-dark-color font-DM-sans font-bold text-sm bg-black/20 duration-200 w-36 ${className}`}

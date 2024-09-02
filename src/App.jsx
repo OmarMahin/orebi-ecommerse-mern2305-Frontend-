@@ -17,12 +17,14 @@ import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import Products from "./pages/Products";
 import SignUp from "./pages/SignUp";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 
 function App() {
     const router = createBrowserRouter(
       createRoutesFromElements(<Route path="/" element={<RootLayout />}>
         <Route index element = {<Home></Home>}></Route>
         <Route path="/products" element = {<Products></Products>}></Route>
+        <Route path="/products/:id" element = {<ProductDetailsPage></ProductDetailsPage>}></Route>
         <Route path="/about" element = {<About></About>}></Route>
         <Route path="/admin" element = {<AdminPage></AdminPage>}></Route>
         <Route path="/admin_login" element = {<AdminLoginPage></AdminLoginPage>}></Route>

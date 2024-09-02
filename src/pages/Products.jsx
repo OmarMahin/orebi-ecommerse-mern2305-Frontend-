@@ -86,10 +86,11 @@ const Products = () => {
 						<Flex className={"flex-wrap gap-y-12 gap-x-20"}>
 							{productsData && productsData.map((data) => (
 								<ProductsItem
+									productId={data._id}
 									productImg={data.productImage}
 									productName={data.productName}
 									productPrice={data.productPrice}
-									productColor='Black'
+									productQuantity={data.productQuantity}
 									newItem={true}
 								></ProductsItem>
 							))}
