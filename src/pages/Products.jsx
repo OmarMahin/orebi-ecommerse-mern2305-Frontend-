@@ -12,21 +12,24 @@ import ProductsItem from "../component/ProductsItem"
 import axios from "axios"
 import { useEffect } from "react"
 import { useState } from "react"
+import LoadingSkeletion from "../component/LoadingSkeletion"
 
 const Products = () => {
-	let [productsData, setProductsData] = useState([])
+	let [productsData, setProductsData] = useState(null)
 	useEffect(() => {
-
-		axios.get("http://localhost:3000/api/v1/product/get_all_products").then((response) => {
-			if (response.status == "200") {
-				const data = response.data
-				if (data.success) {
-					setProductsData(data.data)
+		axios
+			.get("http://localhost:3000/api/v1/product/get_all_products")
+			.then((response) => {
+				if (response.status == "200") {
+					const data = response.data
+					if (data.success) {
+						setProductsData(data.data)
+					}
 				}
-			}		
-		}).catch((error) => {
-			console.log(error)
-		})
+			})
+			.catch((error) => {
+				console.log(error)
+			})
 	}, [])
 
 	return (
@@ -82,19 +85,26 @@ const Products = () => {
 							</div>
 						</Flex>
 					</div>
-					<section className='mt-16'>
-						<Flex className={"flex-wrap gap-y-12 gap-x-20"}>
-							{productsData && productsData.map((data) => (
-								<ProductsItem
-									productId={data._id}
-									productImg={data.productImage}
-									productName={data.productName}
-									productPrice={data.productPrice}
-									productQuantity={data.productQuantity}
-									newItem={true}
-								></ProductsItem>
-							))}
-						</Flex>
+					<section className='mt-16 w-full'>
+						{productsData ? (
+							<Flex className={"flex-wrap gap-y-12 gap-x-20"}>
+								{productsData.map((data) => (
+									<ProductsItem
+										productId={data._id}
+										productImg={data.productImage}
+										productName={data.productName}
+										productPrice={data.productPrice}
+										productQuantity={data.productQuantity}
+										newItem={true}
+									></ProductsItem>
+								))}
+							</Flex>
+						) : (
+							<Flex className={"flex-wrap gap-y-12 gap-x-20 w-full"}>
+								<LoadingSkeletion></LoadingSkeletion>
+								<LoadingSkeletion></LoadingSkeletion>
+							</Flex>
+						)}
 					</section>
 				</div>
 			</Flex>

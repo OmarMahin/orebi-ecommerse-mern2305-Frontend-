@@ -56,7 +56,7 @@ const ProductsItem = ({ productName, productImg, productPrice, productQuantity, 
 				</Link>
 
 				<p className='inline-block font-DM-sans text-text-light-color text-base'>
-					{productPrice}
+					{`${productPrice} Tk`}
 				</p>
 			</Flex>
 			<h4 className='inline-block font-DM-sans text-text-light-color text-base mt-4'>
