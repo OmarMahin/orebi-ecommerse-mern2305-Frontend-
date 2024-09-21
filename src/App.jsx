@@ -18,6 +18,7 @@ import PageNotFound from "./pages/PageNotFound";
 import Products from "./pages/Products";
 import SignUp from "./pages/SignUp";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
+import UserCart from "./pages/UserCart";
 
 function App() {
     const router = createBrowserRouter(
@@ -34,6 +35,7 @@ function App() {
         <Route path="/bad_request" element = {<BadRequest></BadRequest>}></Route>
         <Route path="/sign_up" element = {<SignUp></SignUp>}></Route>
         <Route path="/login" element = {<Login></Login>}></Route>
+        <Route path="/cart" element = {<UserCart></UserCart>}></Route>
         <Route path="*" element = {<PageNotFound></PageNotFound>}></Route>
 
       </Route>)

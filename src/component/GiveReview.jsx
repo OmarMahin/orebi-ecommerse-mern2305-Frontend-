@@ -23,6 +23,7 @@ const GiveReview = ({ productId }) => {
 
 	const [userId, setUserId] = useState("")
 	const [loading, setLoading] = useState(false)
+	const [loggedIn, setLoggedIn] = useState(false)
 
 	const addReview = (e) => {
 		e.preventDefault()

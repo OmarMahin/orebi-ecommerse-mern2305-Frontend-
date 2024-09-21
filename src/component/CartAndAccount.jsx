@@ -82,8 +82,7 @@ const CartAndAccount = () => {
 					const data = response.data
 					if (data.authorized && !loggedIn) {
 						setLoggedIn(true)
-					}
-					else if (!data.authorized && loggedIn){
+					} else if (!data.authorized && loggedIn) {
 						setLoggedIn(false)
 						window.location.reload()
 					}
@@ -119,7 +118,7 @@ const CartAndAccount = () => {
 									className={
 										"border-2 border-[#F0F0F0] border-b-0 py-4 px-14 hover:bg-white hover:text-text-dark-color font-DM-sans w-52 bg-text-dark-color text-white duration-150"
 									}
-                                    onClick = {logInAndAccount}
+									onClick={logInAndAccount}
 								>
 									{loggedIn ? "My Account" : "Log in"}
 								</ListItem>
@@ -138,40 +137,12 @@ const CartAndAccount = () => {
 			</div>
 
 			<div ref={cartRef}>
-				<PiShoppingCartFill className='w-5 h-5 hover:cursor-pointer' onClick={handleShowCart} />
-				{showCart && (
-					<div className='absolute -bottom-4 right-0 translate-y-[100%] z-20'>
-						<List className={"bg-[#F5F5F3] w-[358px] flex-col"}>
-							<ListItem className={"items-center w-full justify-between p-5"}>
-								<Link className={"items-center gap-4"}>
-									<Image src={"images/cart_Image.png"} className={"w-20 h-20"}></Image>
-									<Flex
-										className={
-											" flex-col text-text-dark-color font-DM-sans font-bold gap-3 text-sm"
-										}
-									>
-										<h3>Black Smart Watch</h3>
-										<h3>$44.00</h3>
-									</Flex>
-								</Link>
-
-								<IoClose className=' text-text-dark-color w-5 h-5 cursor-pointer' />
-							</ListItem>
-						</List>
-						<div className='w-full bg-white p-5 border-2 border-top-0 border-[#F0F0F0]'>
-							<h3 className='text-text-light-color font-DM-sans text-base'>
-								Subtotal:{" "}
-								<span className='text-text-dark-color font-DM-sans text-base font-bold'>
-									$44.00
-								</span>{" "}
-							</h3>
-							<Flex className={"flex justify-between mt-3"}>
-								<Button>View Cart</Button>
-								<Button>Checkout</Button>
-							</Flex>
-						</div>
-					</div>
-				)}
+				<Link to={"/cart"}>
+					<PiShoppingCartFill
+						className='w-5 h-5 hover:cursor-pointer'
+						onClick={handleShowCart}
+					/>
+				</Link>
 			</div>
 		</Flex>
 	)
