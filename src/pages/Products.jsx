@@ -13,6 +13,7 @@ import axios from "axios"
 import { useEffect } from "react"
 import { useState } from "react"
 import LoadingSkeletion from "../component/LoadingSkeletion"
+import { Helmet } from "react-helmet-async"
 
 const Products = () => {
 	let [productsData, setProductsData] = useState(null)
@@ -34,6 +35,11 @@ const Products = () => {
 
 	return (
 		<Container>
+			<Helmet>
+				<title>Products-Orebi Ecommerse</title>
+				<meta name="description" content="Products" />
+				<link rel="canonical" href="https://orebiecommerse2305.netlify.app/products" />	
+			</Helmet>
 			<Breadcrumb></Breadcrumb>
 
 			<Flex className={"mt-32 gap-10"}>
