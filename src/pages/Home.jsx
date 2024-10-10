@@ -21,7 +21,7 @@ const Home = () => {
 
 				<meta property='og:title' content={"Home"} />
 				<meta property='og:description' content={"Welcome to Orebi Ecommerse"} />
-				<meta property='og:image' content={"images/banner_image.png"} />
+				<meta property='og:image' content={"https://orebiecommerse2305.netlify.app/images/banner_image.png"} />
 				<meta property='og:type' content='website' />
 				<meta property='og:url' content={window.location.href} />
 
@@ -29,7 +29,7 @@ const Home = () => {
 				<meta name='twitter:card' content='summary_large_image' />
 				<meta name='twitter:title' content={"Home"} />
 				<meta name='twitter:description' content={"Welcome to Orebi Ecommerse"} />
-				<meta name='twitter:image' content={"images/banner_image.png"} />
+				<meta name='twitter:image' content={"https://orebiecommerse2305.netlify.app/images/banner_image.png"} />
 			</Helmet>
 			<Banner></Banner>
 			<Information></Information>
