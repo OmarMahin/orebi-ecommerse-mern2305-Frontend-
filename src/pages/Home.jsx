@@ -23,7 +23,7 @@ const Home = () => {
 				<meta property='og:description' content={"Welcome to Orebi Ecommerse"} />
 				<meta property='og:image' content={"https://orebiecommerse2305.netlify.app/images/banner_image.png"} />
 				<meta property='og:type' content='website' />
-				<meta property='og:url' content={window.location.href} />
+				<meta property='og:url' content={"https://orebiecommerse2305.netlify.app/"} />
 
 				{/* Twitter meta tags (optional) */}
 				<meta name='twitter:card' content='summary_large_image' />
