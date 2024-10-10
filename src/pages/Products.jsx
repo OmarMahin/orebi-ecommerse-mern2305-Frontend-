@@ -39,6 +39,18 @@ const Products = () => {
 				<title>Products-Orebi Ecommerse</title>
 				<meta name="description" content="Products" />
 				<link rel="canonical" href="https://orebiecommerse2305.netlify.app/products" />	
+
+				<meta property='og:title' content={"Products-Orebi Ecommerse"} />
+				<meta property='og:description' content={"Here you can find all kinds of products. According to your choice"} />
+				<meta property='og:image' content={"images/banner_image.png"} />
+				<meta property='og:type' content='website' />
+				<meta property='og:url' content={window.location.href} />
+
+				{/* Twitter meta tags (optional) */}
+				<meta name='twitter:card' content='summary_large_image' />
+				<meta name='twitter:title' content={"Products-Orebi Ecommerse"} />
+				<meta name='twitter:description' content={"Here you can find all kinds of products. According to your choice"} />
+				<meta name='twitter:image' content={"images/banner_image.png"} />
 			</Helmet>
 			<Breadcrumb></Breadcrumb>
 

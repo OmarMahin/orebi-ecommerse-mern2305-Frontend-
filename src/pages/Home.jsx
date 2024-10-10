@@ -13,12 +13,23 @@ import { Helmet } from "react-helmet-async"
 
 const Home = () => {
 	return (
-		<>	
-		
+		<>
 			<Helmet>
 				<title>Orebi Ecommerse</title>
 				<meta name='description' content='Home Page' />
 				<link rel='canonical' href='https://orebiecommerse2305.netlify.app/' />
+
+				<meta property='og:title' content={"Home"} />
+				<meta property='og:description' content={"Welcome to Orebi Ecommerse"} />
+				<meta property='og:image' content={"images/banner_image.png"} />
+				<meta property='og:type' content='website' />
+				<meta property='og:url' content={window.location.href} />
+
+				{/* Twitter meta tags (optional) */}
+				<meta name='twitter:card' content='summary_large_image' />
+				<meta name='twitter:title' content={"Home"} />
+				<meta name='twitter:description' content={"Welcome to Orebi Ecommerse"} />
+				<meta name='twitter:image' content={"images/banner_image.png"} />
 			</Helmet>
 			<Banner></Banner>
 			<Information></Information>
